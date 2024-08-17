@@ -1,0 +1,17 @@
+{
+  "name": "project-ballot",
+  "version": "1.0.0",
+  "description": "vote for your favorite team!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Njine",
+  "license": "ISC",
+  "dependencies": {
+    "hardhat": "^2.22.8"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0"
+  }
+}
