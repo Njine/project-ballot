@@ -1,5 +1,6 @@
 import { viem } from "hardhat";
 import { toHex, hexToString } from "viem";
+import { writeContract } from "viem";
 
 async function main() {
     const contractAddress = process.argv[2];
@@ -8,10 +9,10 @@ async function main() {
     if (!contractAddress || !proposalIndex) {
         throw new Error("Contract address and proposal index must be provided");
     }
-
     const publicClient = await viem.getPublicClient();
     const voter = await viem.getWalletClients();
 
+    const hash = await writeContract({
     const hash = await voter.writeContract({
         address: contractAddress,
         abi: /* ABI of your contract */,
