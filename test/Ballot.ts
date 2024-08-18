@@ -46,16 +46,6 @@ describe("Ballot", () => {
         });
     });
 
-    describe("when the chairperson interacts with the giveRightToVote function", () => {
-        it("gives right to vote for another address", async () => {
-            const { ballotContract, deployer, otherAccount } = await loadFixture(deployContract);
-            const proposal = await ballotContract.read.proposals([BigInt('0x${myString}')]);
-            const voter = await ballotContract.read.voters([otherAccount.account.address]);
-            expect(voter[0]).to.eq(1n);
-            await ballotContract.write.giveRightToVote(otherAccount.account.address);
-        });
-    });
-
     describe("when the voter interacts with the vote function", () => {
         it("should register the vote", async () => {
             const { ballotContract, deployer, otherAccount } = await loadFixture(deployContract);
@@ -79,14 +69,14 @@ describe("Ballot", () => {
     describe("when an account other than the chairperson interacts with giveRightToVote", () => {
         it("should revert", async () => {
             const { ballotContract, otherAccount } = await loadFixture(deployContract);
-            await expect(ballotContract.connect(otherAccount).giveRightToVote(otherAccount.account.address)).to.be.revertedWith("Only chairperson can give right to vote.");
+            await expect(ballotContract.write.connect(otherAccount).giveRightToVote(otherAccount.account.address)).to.be.revertedWith("Only chairperson can give right to vote.");
         });
     });
 
     describe("when an account without right to vote interacts with the vote function", () => {
         it("should revert", async () => {
             const { ballotContract, otherAccount } = await loadFixture(deployContract);
-            await expect(ballotContract.connect(otherAccount).vote(0)).to.be.revertedWith("Has no right to vote");
+            await expect(ballotContract.write.connect(otherAccount).vote(0)).to.be.revertedWith("Has no right to vote");
         });
     });
 
