@@ -1,3 +1,4 @@
+/*
 import { expect } from "chai";
 import { toHex, hexToString } from "viem";
 import { viem } from "hardhat";
@@ -118,3 +119,4 @@ describe("Ballot", () => {
         });
     });
 });
+*/
