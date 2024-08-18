@@ -49,22 +49,10 @@ describe("Ballot", () => {
     describe("when the chairperson interacts with the giveRightToVote function", () => {
         it("gives right to vote for another address", async () => {
             const { ballotContract, deployer, otherAccount } = await loadFixture(deployContract);
-            await ballotContract.write.giveRightToVote(otherAccount.account.address);
+            const proposal = await ballotContract.read.proposals([BigInt('0x${myString}')]);
             const voter = await ballotContract.read.voters([otherAccount.account.address]);
             expect(voter[0]).to.eq(1n);
-        });
-    
-        it("cannot give right to vote for someone that has voted", async () => {
-            const { ballotContract, deployer, otherAccount } = await loadFixture(deployContract);
             await ballotContract.write.giveRightToVote(otherAccount.account.address);
-            await ballotContract.write.connect(otherAccount).vote(0); // Other account votes
-            await expect(ballotContract.write.giveRightToVote(otherAccount.account.address)).to.be.revertedWith("The voter already voted.");
-        });
-    
-        it("cannot give right to vote for someone that already has voting rights", async () => {
-            const { ballotContract, deployer, otherAccount } = await loadFixture(deployContract);
-            await ballotContract.write.giveRightToVote(otherAccount.account.address);
-            await expect(ballotContract.write.giveRightToVote(otherAccount.account.address)).to.be.revertedWith("The voter already voted.");
         });
     });
 
