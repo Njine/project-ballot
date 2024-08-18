@@ -1,3 +1,4 @@
+// Sample contract to lock funds until a certain time
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.24;
 
