@@ -1,7 +1,12 @@
 import { viem } from "hardhat";
 import { toHex, hexToString } from "viem";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
+const providerApiKey = process.env.INFURA_API_KEY || "";
+const deployerPrivateKey = process.env.PRIVATE_KEY || "";
+
+const PROPOSALS = ["Rock", "Paper", "Scissors"];
 
 async function main() {
     console.log("Proposals: ");
